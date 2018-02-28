@@ -48,7 +48,7 @@ def _default_text_register(text_msg):
         elif text_msg.text == 'H':
             user.send('******使用说明******\n'
                       '首次使用需绑定手机号码\n'
-                      '*绑定方法*'
+                      '*绑定方法*\n'
                       '**直接发送手机号码给我\n\n'
                       '*领取红包方法*\n'
                       '**直接将外卖红包分享给我\n'
@@ -120,13 +120,14 @@ def auto_accept_friends(msg):
     new_friend = msg.card.accept()
     # 向新的好友发送消息
     new_friend.send('本项目为自动领取美团、饿了么红包，自动手气最佳 \n'
-                    '项目已开源'
-                    'https://github.com/chengzijian/ai-hongbao'
+                    '项目已开源\n'
+                    'https://github.com/chengzijian/ai-hongbao\n'
                     '感谢以下项目的支持\n'
                     'https://github.com/game-helper/hongbao\n'
                     'https://github.com/youfou/wxpy\n'
-                    '查看使用说明请扣 H'
-                    '查询绑定的手机号码请扣 Q'
+                    '查看使用说明请扣 H\n'
+                    '查询绑定的手机号码请扣 Q\n'
+                    '使用前请先绑定手机号'
                     .decode("UTF-8"))
 
 
