@@ -95,7 +95,7 @@ def _default_share_register(share_msg):
 @bot.register()
 def deal_with_msg(msg):
     # step 1. 打印到console
-    print(str(msg.receive_time), msg)
+    # print(str(msg.receive_time), msg)
 
     # step 2. 保存TEXT类型消息的txt文件
     if msg.type == 'Text':
