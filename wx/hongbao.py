@@ -47,6 +47,14 @@ def _default_text_register(text_msg):
                         user.send(('当前绑定的手机号码为：%s' % str(user.remark_name)).decode("UTF-8"))
                     else:
                         user.send('绑定的号码有误，请正确绑定'.decode("UTF-8"))
+            elif text_msg.text == 'H':
+                user.send('使用说明\n'
+                          '首次使用需绑定手机号码\n'
+                          '绑定方法\n'
+                          ' 直接发送手机号码给我\n '
+                          '领取红包方法\n'
+                          ' 直接将外卖红包分享给我\n'
+                          ' 也可发送外卖红包链接地址'.decode("UTF-8"))
             else:
                 new_remark_name = re.findall(r"^[1][3,4,5,6,7,8][0-9]{9}$", text_msg.text)
                 if new_remark_name:
