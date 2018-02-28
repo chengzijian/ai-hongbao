@@ -35,6 +35,7 @@ def _get_red_pack(user, link, mobile):
 def _default_text_register(text_msg):
     my_friends = bot.friends().search(text_msg.sender.name)
     for user in my_friends:
+        user.mark_as_read()
         if text_msg.text == 'Q':
             if not str(user.remark_name):
                 user.send('您还未绑定手机号'.decode("UTF-8"))
@@ -77,25 +78,23 @@ def _default_text_register(text_msg):
 def _default_share_register(share_msg):
     my_friends = bot.friends().search(share_msg.sender.name)
     for user in my_friends:
-        if user.wxid == bot.self.wxid:
-            continue
-        else:
-            if user.remark_name:
-                remark_name = re.findall(r"^[1][3,4,5,6,7,8][0-9]{9}$", user.remark_name)
-                if remark_name:
-                    mobile = '' + str(remark_name).replace('[u\'', '').replace('\']', '')
-                    url = share_msg.raw["Url"]
-                    url = str(url).replace("&amp;", "&")
-                    # print url
-                    # print mobile
-                    user.send('红包领取中…'.decode("UTF-8"))
-                    _get_red_pack(user, url, mobile)
-                else:
-                    user.send('领取红包前请先绑定要领取的手机号（直接发送号码即可）'.decode("UTF-8"))
+        user.mark_as_read()
+        if user.remark_name:
+            remark_name = re.findall(r"^[1][3,4,5,6,7,8][0-9]{9}$", user.remark_name)
+            if remark_name:
+                mobile = '' + str(remark_name).replace('[u\'', '').replace('\']', '')
+                url = share_msg.raw["Url"]
+                url = str(url).replace("&amp;", "&")
+                # print url
+                # print mobile
+                user.send('红包领取中…'.decode("UTF-8"))
+                _get_red_pack(user, url, mobile)
             else:
                 user.send('领取红包前请先绑定要领取的手机号（直接发送号码即可）'.decode("UTF-8"))
+        else:
+            user.send('领取红包前请先绑定要领取的手机号（直接发送号码即可）'.decode("UTF-8"))
 
-            break
+        break
 
 
 @bot.register()
