@@ -33,7 +33,8 @@ def _get_red_pack(user, link, mobile):
 
 
 def _default_text_register(text_msg):
-    my_friends = bot.friends().search(text_msg.sender.name)
+    print str(text_msg.sender.name)
+    my_friends = bot.friends().search(str(text_msg.sender.name))
     for user in my_friends:
         user.mark_as_read()
         if text_msg.text == 'Q':
