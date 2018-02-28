@@ -116,10 +116,14 @@ def auto_accept_friends(msg):
     new_friend = msg.card.accept()
     # 向新的好友发送消息
     new_friend.send('本项目为自动领取美团、饿了么红包，自动手气最佳 \n'
-                    '感谢以下项目的作者的支持\n'
+                    '项目已开源'
+                    'https://github.com/chengzijian/ai-hongbao'
+                    '感谢以下项目的支持\n'
                     'https://github.com/game-helper/hongbao\n'
                     'https://github.com/youfou/wxpy\n'
-                    '查询绑定的手机号码请扣 Q'.decode("UTF-8"))
+                    '查看使用说明请扣 H'
+                    '查询绑定的手机号码请扣 Q'
+                    .decode("UTF-8"))
 
 
 # 堵塞线程，以保持监听状态
