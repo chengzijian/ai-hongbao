@@ -21,7 +21,7 @@ bot = Bot(cache_path=True)
 def _get_red_pack(user, link, mobile):
     try:
         data = {'url': link, 'mobile': mobile}
-        geturl = 'http://hb.tmimw.cc/hongbao'
+        geturl = 'https://hongbao.xxooweb.com/hongbao'
         r = requests.post(url=geturl, data=data)
         response = r.text
         if response is not None:
