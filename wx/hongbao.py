@@ -16,6 +16,15 @@ bot = Bot(cache_path=True)
 默认消息处理方法
 ==============================================================================
 """
+# 当服务暂不可用时增加友好提示
+# 进行通知的用户
+ADMIN_NAME = '程子健'
+MEITUAN_TOGGLE = 'mt[on]|mt[off]'
+ELEME_TOGGLE = 'el[on]|el[off]'
+
+# 1 可用 0 不可用
+mt_status = 1
+el_status = 1
 
 
 def _get_red_pack(user, link, mobile):
@@ -36,7 +45,22 @@ def _default_text_register(text_msg):
     user = text_msg.chat
     if user and user.is_friend:
         user.mark_as_read()
-        if text_msg.text == 'Q' or text_msg.text == 'q':
+        if (user.nick_name.decode("utf-8")) == ADMIN_NAME and ('mt[' in text_msg.text or 'el[' in text_msg.text):
+            mt = MEITUAN_TOGGLE.split('|')
+            el = ELEME_TOGGLE.split('|')
+            global mt_status
+            global el_status
+            if text_msg.text == mt[0]:
+                mt_status = 1
+            elif text_msg.text == mt[1]:
+                mt_status = 0
+            elif text_msg.text == el[0]:
+                el_status = 1
+            elif text_msg.text == el[1]:
+                el_status = 0
+            result = '美团状态 %d, 饿了状态 %d' % (mt_status, el_status)
+            user.send(result.decode("UTF-8"))
+        elif text_msg.text == 'Q' or text_msg.text == 'q':
             if not str(user.remark_name):
                 user.send('您还未绑定手机号'.decode("UTF-8"))
             else:
@@ -82,6 +106,13 @@ def _default_share_register(share_msg):
                     mobile = '' + str(remark_name).replace('[u\'', '').replace('\']', '')
                     url = share_msg.raw["Url"]
                     url = str(url).replace("&amp;", "&")
+
+                    if 'activity.waimai.meituan.com' in url and mt_status == 0:
+                        user.send('美团红包已失效，我们正在尝试修复'.decode("UTF-8"))
+                        return
+                    if 'h5.ele.me/hongbao' in url and el_status == 0:
+                        user.send('饿了么红包已失效，我们正在尝试修复'.decode("UTF-8"))
+                        return
                     # print url
                     # print mobile
                     user.send('红包领取中…'.decode("UTF-8"))
