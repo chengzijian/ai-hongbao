@@ -107,6 +107,9 @@ def _default_share_register(share_msg):
                     url = share_msg.raw["Url"]
                     url = str(url).replace("&amp;", "&")
 
+                    user.send('饿了么、美团均已失效，感谢大家这段时间以来的支持 \n目前我们正在开发新版的美团辅助，上线后会第一时间通知给您 \n敬请关注'.decode("UTF-8"))
+                    return
+
                     if 'activity.waimai.meituan.com' in url and mt_status == 0:
                         user.send('美团红包已失效，我们正在尝试修复'.decode("UTF-8"))
                         return
@@ -146,7 +149,7 @@ def auto_accept_friends(msg):
     new_friend = msg.card.accept()
     # 向新的好友发送消息
     new_friend.send('本项目为自动领取美团、饿了么红包，自动手气最佳 \n'
-                    '项目已开源\n'
+                    '项目开源地址\n'
                     'https://github.com/chengzijian/ai-hongbao\n'
                     '感谢以下项目的支持\n'
                     'https://github.com/game-helper/hongbao\n'
