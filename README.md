@@ -28,7 +28,7 @@ python wx/hongbao.py
       <img src="img/wx.png"><p>请加上面的微信号查看演示</p>
     </td>
     <td align="center" width="300">
-      <img src="img/donate.png"><p>微信、支付宝、QQ均可</p>
+      <img src="img/donate1.png"><p>微信、支付宝、QQ均可</p>
     </td>
   </tr>
 </table>
